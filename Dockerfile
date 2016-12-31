@@ -41,7 +41,7 @@ RUN echo '  eval "$(anyenv init -)"' >> /home/$username/.bash_profile
 RUN echo 'fi' >> /home/$username/.bash_profile
 RUN apt-get install -y direnv
 RUN echo 'eval "$(direnv hook bash)"' >> /home/$username/.bash_profile
-RUN apt-get install -y re2c bison pkg-config xz-utils libxml2-dev libcurl4-openssl-dev libjpeg62-turbo-dev libpng12-dev libmcrypt-dev libreadline-dev libtidy-dev libxslt1-dev imagemagick autoconf
+RUN apt-get install -y re2c bison pkg-config xz-utils libssl-dev libxml2-dev libcurl4-openssl-dev libjpeg62-turbo-dev libpng12-dev libmcrypt-dev libreadline-dev libtidy-dev libxslt1-dev imagemagick autoconf
 RUN mkdir -p /var/run/php-fpm/ && chown www-data.www-data /var/run/php-fpm/
 RUN mkdir -p /etc/php-fpm/php-fpm.d/
 ADD settings/supervisor/conf.d/php-fpm.conf /etc/supervisor/conf.d/
