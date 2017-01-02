@@ -39,6 +39,9 @@ RUN echo 'if [ -e $HOME/.anyenv/bin ]; then' >> /home/$username/.bash_profile
 RUN echo '  export PATH="$HOME/.anyenv/bin:$PATH"' >> /home/$username/.bash_profile
 RUN echo '  eval "$(anyenv init -)"' >> /home/$username/.bash_profile
 RUN echo 'fi' >> /home/$username/.bash_profile
+RUN wget "https://dl.eff.org/certbot-auto" -P /usr/local/bin/
+RUN chmod a+x /usr/local/bin/certbot-auto
+RUN /usr/local/bin/certbot-auto --os-packages-only --non-interactive
 RUN apt-get install -y direnv
 RUN echo 'eval "$(direnv hook bash)"' >> /home/$username/.bash_profile
 RUN apt-get install -y re2c bison pkg-config xz-utils libssl-dev libxml2-dev libcurl4-openssl-dev libjpeg62-turbo-dev libpng12-dev libmcrypt-dev libreadline-dev libtidy-dev libxslt1-dev imagemagick autoconf
