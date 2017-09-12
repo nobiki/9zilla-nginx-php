@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM debian:stretch
 MAINTAINER Naoaki Obiki
 RUN apt-get update && apt-get install -y sudo git
 ARG username="9zilla"
@@ -50,7 +50,7 @@ RUN chmod a+x /usr/local/bin/certbot-auto
 RUN /usr/local/bin/certbot-auto --os-packages-only --non-interactive
 RUN apt-get install -y direnv
 RUN echo 'eval "$(direnv hook bash)"' >> /home/$username/.bash_profile
-RUN apt-get install -y re2c bison pkg-config xz-utils libssl-dev libxml2-dev libcurl4-openssl-dev libjpeg62-turbo-dev libpng12-dev libicu-dev libmcrypt-dev libreadline-dev libtidy-dev libxslt1-dev imagemagick autoconf
+RUN apt-get install -y re2c bison pkg-config xz-utils libssl-dev libxml2-dev libcurl4-openssl-dev libjpeg62-turbo-dev libpng-dev libicu-dev libmcrypt-dev libreadline-dev libtidy-dev libxslt1-dev imagemagick autoconf
 COPY settings/php/default_configure_options /
 RUN mkdir -p /var/run/php-fpm/ && chown www-data.www-data /var/run/php-fpm/
 RUN mkdir -p /etc/php-fpm/php-fpm.d/
@@ -62,7 +62,7 @@ RUN apt-get install -y nginx
 RUN chmod 755 /var/log/nginx/
 ADD settings/nginx/nginx.conf /etc/nginx/
 RUN systemctl enable nginx
-RUN apt-get install -y mariadb-client libmysqlclient-dev
+RUN apt-get install -y mariadb-client default-libmysqlclient-dev
 COPY bootstrap.sh /
 RUN chmod +x /bootstrap.sh
 CMD ["/bootstrap.sh"]
